@@ -36,6 +36,11 @@ class Tarefa {
     desc = map[columnDesc];
     dataTarefa = map[columnDataTarefa];
   }
+
+  @override
+  String toString() {
+    return 'ID: $id, Nome: $titulo, Email: $desc, phone: $dataTarefa';
+  }
 }
 
 class ConfigApi {
