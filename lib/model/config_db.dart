@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:core';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -39,7 +38,7 @@ class Tarefa {
 
   @override
   String toString() {
-    return 'ID: $id, Nome: $titulo, Email: $desc, phone: $dataTarefa';
+    return 'ID: $id, Titulo: $titulo, Descrição: $desc, Data: $dataTarefa';
   }
 }
 
