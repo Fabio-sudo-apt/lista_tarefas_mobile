@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     api.listaDeTarefas().then((value) {
       setState(() {
         tarefas = value;
-        print(value);
+        //print(value);
       });
     });
   }
