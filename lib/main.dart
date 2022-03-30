@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'TarefasApi',
       theme: ThemeData(
         primarySwatch: Colors.green ,
+        primaryColor: const Color(0xff1CB273),
       ),
       debugShowCheckedModeBanner: false,
       home:  const HomePage(),

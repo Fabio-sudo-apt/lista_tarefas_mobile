@@ -27,6 +27,16 @@ class _TaferaNewState extends State<TaferaNew> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tituloController.dispose();
+    _descController.dispose();
+
+    _focusTitulo.dispose();
+    _focusDesc.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar("Nova Tarefa"),
@@ -52,11 +62,6 @@ class _TaferaNewState extends State<TaferaNew> {
                 icon: Icon(Icons.title),
                 labelText: "Titulo",
               ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
             ),
             TextFormField(
               controller: _descController,
@@ -66,11 +71,6 @@ class _TaferaNewState extends State<TaferaNew> {
                 icon: Icon(Icons.description),
                 labelText: "Descrição",
               ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
             ),
           ],
         ),
@@ -78,11 +78,18 @@ class _TaferaNewState extends State<TaferaNew> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xff1CB273),
         onPressed: () {
-          if (_tituloController.text != null && _descController.text != null) {
+          if (_tituloController.text.isEmpty || _descController.text.isEmpty) {
+            if (_tituloController.text.isEmpty) {
+              FocusScope.of(context).requestFocus(_focusTitulo);
+            } else {
+              FocusScope.of(context).requestFocus(_focusDesc);
+            }
+          } else {
             tarefa.titulo = _tituloController.text;
             tarefa.desc = _descController.text;
             tarefa.isDone = false;
             final dataDeCriacaoDaTarefa = DateTime.now();
+           
             tarefa.dataTarefa =
                 DateFormat("dd/MM/yyyy").format(dataDeCriacaoDaTarefa);
             Navigator.pop(context, tarefa);

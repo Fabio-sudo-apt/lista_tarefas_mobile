@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taredas_api/model/config_db.dart';
 import 'package:taredas_api/views/routes/alertDailog.dart';
+import 'package:taredas_api/views/routes/alertDailogEdit.dart';
 import 'package:taredas_api/views/routes/tarefa_new.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -67,7 +68,7 @@ Container getContainer(
     ),
     child: GestureDetector(
       onLongPress: () {
-        print("Test onLongPress $index"); // Fazer amanhã
+        // Fazer amanhã
       },
       child: Slidable(
         startActionPane: ActionPane(
@@ -75,7 +76,7 @@ Container getContainer(
           children: [
             SlidableAction(
               flex: 2,
-              onPressed: (context) async{
+              onPressed: (context) async {
                 await editTarefa(context, tarefas[index]);
                 atualizaTela();
               },
@@ -109,7 +110,7 @@ Future editTarefa(BuildContext context, Tarefa editedTask) async {
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      return AlertDailog(tesk: editedTask);
+      return AlertDailogEdit(tesk: editedTask);
     },
   );
 }
@@ -124,7 +125,14 @@ ListTile listTile(
   final tesk = tarefas[index];
   bool? teskNew = tesk.isDone;
   return ListTile(
-    onTap: () {},
+    onTap: () async {
+      await showDialog<Tarefa>(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDailog(tesk: tesk);
+          });
+    },
     title: Text(
       tesk.titulo!,
       style: TextStyle(
@@ -168,9 +176,10 @@ FloatingActionButton buttonFloat(
           builder: ((context) => const TaferaNew()),
         ),
       );
-      if (newTarefa == null) return;
-      api.salvaTarefa(newTarefa);
-      atualizaTela();
+      if (newTarefa != null) {
+        await api.salvaTarefa(newTarefa);
+        atualizaTela();
+      }
     },
     backgroundColor: const Color(0xff1CB273),
     child: const Icon(
@@ -179,4 +188,3 @@ FloatingActionButton buttonFloat(
     ),
   );
 }
-
