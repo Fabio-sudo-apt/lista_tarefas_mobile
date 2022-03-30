@@ -63,7 +63,7 @@ class _AlertDailogState extends State<AlertDailog> {
       actions: [
         ElevatedButton(
           onPressed: () async{
-             api.atualizaTarefa(widget.tesk);
+            api.atualizaTarefa(widget.tesk);
             Navigator.pop(context);
           },
           child: const Text(

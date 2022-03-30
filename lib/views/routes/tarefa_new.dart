@@ -17,6 +17,9 @@ class _TaferaNewState extends State<TaferaNew> {
   final _tituloController = TextEditingController();
   final _descController = TextEditingController();
 
+  final _focusTitulo = FocusScopeNode();
+  final _focusDesc = FocusScopeNode();
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +46,7 @@ class _TaferaNewState extends State<TaferaNew> {
           children: [
             TextFormField(
               controller: _tituloController,
+              focusNode: _focusTitulo,
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                 icon: Icon(Icons.title),
@@ -56,6 +60,7 @@ class _TaferaNewState extends State<TaferaNew> {
             ),
             TextFormField(
               controller: _descController,
+              focusNode: _focusDesc,
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                 icon: Icon(Icons.description),
