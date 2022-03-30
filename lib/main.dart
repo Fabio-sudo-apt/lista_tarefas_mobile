@@ -9,10 +9,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'TarefasApi',
+      theme: ThemeData(
+        primarySwatch: Colors.green ,
+      ),
       debugShowCheckedModeBanner: false,
-      home:  HomePage(),
+      home:  const HomePage(),
     );
   }
 }

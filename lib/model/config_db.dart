@@ -7,12 +7,14 @@ const String columnId = "columnId";
 const String columnTitulo = "columnTitulo";
 const String columnDesc = "columnDesc";
 const String columnDataTarefa = "columnDataTarefa";
+const String columnisDone = "columnisDone";
 
 class Tarefa {
   int? id;
   String? titulo;
   String? desc;
   String? dataTarefa;
+  bool? isDone;
 
   Tarefa();
 
@@ -21,7 +23,8 @@ class Tarefa {
       columnId: id,
       columnTitulo: titulo,
       columnDesc: desc,
-      columnDataTarefa: dataTarefa
+      columnDataTarefa: dataTarefa,
+      columnisDone: isDone
     };
     if (id != null) {
       map[columnId] = id;
@@ -34,11 +37,12 @@ class Tarefa {
     titulo = map[columnTitulo];
     desc = map[columnDesc];
     dataTarefa = map[columnDataTarefa];
+    isDone = map[columnisDone] == 0 ? false : true;
   }
 
   @override
   String toString() {
-    return 'ID: $id, Titulo: $titulo, Descrição: $desc, Data: $dataTarefa';
+    return 'ID: $id, Titulo: $titulo, Descrição: $desc, Data: $dataTarefa, IsDone: $isDone';
   }
 }
 
@@ -69,7 +73,8 @@ class ConfigApi {
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnTitulo TEXT,
         $columnDesc TEXT,
-        $columnDataTarefa TEXT
+        $columnDataTarefa TEXT,
+        $columnisDone BIT DEFAULT 0
       )""");
     });
   }
@@ -117,6 +122,7 @@ class ConfigApi {
         columnTitulo,
         columnDesc,
         columnDataTarefa,
+        columnisDone
       ],
       where: "$columnId = ?",
       whereArgs: [tarefaID],
